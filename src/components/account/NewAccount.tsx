@@ -2,6 +2,7 @@ import React from "react";
 import Account from "../../interfaces/account";
 import AccountService from "../../services/account";
 import AccountList from "./list/AccountList";
+import CreditAccount from "./CreditAccount";
 
 class NewAccount extends React.Component <any, Account> {
 
@@ -52,6 +53,7 @@ class NewAccount extends React.Component <any, Account> {
           <input type="submit" value="Criar" />
         </form>
         <AccountList accounts={this.accounts}/>
+        <CreditAccount />
       </React.Fragment>
     );
   }

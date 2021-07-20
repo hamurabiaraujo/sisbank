@@ -27,8 +27,26 @@ export default class AccountService {
     return this.ACCOUNTS;
   }
 
+  /*getById(idAccount: string): Account {
+    const account = this.ACCOUNTS.find(acc => { return acc.id = idAccount});
+    if(account){
+      return account;
+    }
+  }*/ 
+
 
   create(a: Account) {
     this.ACCOUNTS.push(a);
   }
+  
+  creditOnAccount(accountId: string, creditValue: number) {
+    const accountIndex = this.ACCOUNTS.findIndex(acc => acc.id === accountId);
+    if(accountIndex >= 0) {
+      this.ACCOUNTS[accountIndex].value += creditValue;
+    }
+    else {
+      console.log('Conta não existe');
+    }
+  }
+   
 }
