@@ -1,5 +1,6 @@
 import React from "react";
 import Account from "../../../interfaces/account";
+import CreditAccount from '../CreditAccount';
 
 export default class AccountList extends React.Component <any, any>{
   
@@ -14,6 +15,9 @@ export default class AccountList extends React.Component <any, any>{
 
   render() {
     const items = this.accounts.map( a => <li key={a.id}>{a.id} : R$ {a.value}</li> );
-    return( <ul>{items}</ul> );
+    return( <div>
+              <ul>{items}</ul>
+              <CreditAccount accounts={this.accounts}/>
+            </div> );
   }
 }

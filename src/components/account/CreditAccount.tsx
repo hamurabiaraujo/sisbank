@@ -1,12 +1,11 @@
 import React from "react";
-import Account from "../../interfaces/account";
 import AccountService from "../../services/account";
+import Account from "../../interfaces/account";
 
 export default class CreditAccount extends React.Component<any, any> {
   
-  accounts: Account[];
-  //creditValue: number;
   service = new AccountService();
+  accounts: Account[];
   
   constructor(props: any) {
     super(props);
@@ -15,16 +14,11 @@ export default class CreditAccount extends React.Component<any, any> {
         creditValue: 0
     };
 
-    this.accounts = props.accounts;
-    //this.creditValue = 0;
-    this.updateAccounts(); 
+    this.accounts = props.accounts;    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  updateAccounts() {
-    this.accounts = this.service.getAll();
-  }
   
   handleChange(event: any) {
     const target = event.target;
@@ -39,19 +33,17 @@ export default class CreditAccount extends React.Component<any, any> {
 
   handleSubmit(event: any) {
     event.preventDefault();
-    this.service.creditOnAccount(this.state.accountId, this.state.creditValue);
+    this.accounts = this.service.creditOnAccount(this.state.accountId, this.state.creditValue, this.accounts);
     this.setState({
         accountId: '',
         creditValue: 0
     });
-    this.updateAccounts();
 
     alert(`R$${this.state.creditValue} creditado na conta ${this.state.accountId}`);
   }
 
     render() {
         return (
-            //const items = this.accounts.map( a => <li key={a.id}>{a.id} : R$ {a.value}</li> );
             <React.Fragment>
                 <form onSubmit={this.handleSubmit}>
                 <label>Número da conta:
