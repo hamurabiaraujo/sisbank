@@ -40,5 +40,15 @@ export default class AccountService {
     }
     return accounts;
   }
+
+  getBankBalance(accountId: string, accounts: Account[]): number {
+    const accountIndex = accounts.findIndex(acc => acc.id === accountId);
+    if(accountIndex >= 0) {
+      return accounts[accountIndex].value;
+    } else {
+      console.log('Conta não existe');
+      return -1;
+    }
+  }
    
 }
