@@ -31,10 +31,16 @@ export default class AccountService {
     this.ACCOUNTS.push(a);
   }
   
-  creditOnAccount(accountId: string, creditValue: number, accounts: Account[]): Account[] {
+  operationOnAccount(accountId: string, operationValue: number, typeOfOperation: string, accounts: Account[]): Account[] {
     const accountIndex = accounts.findIndex(acc => acc.id === accountId);
     if(accountIndex >= 0) {
-      accounts[accountIndex].value += creditValue;
+      if(typeOfOperation === 'Credit'){
+        accounts[accountIndex].value += operationValue;
+      } else if (typeOfOperation === 'Debit') {
+        accounts[accountIndex].value -= operationValue;
+      } else {
+        console.log('Operação inválida');
+      }
     } else {
       console.log('Conta não existe');
     }
@@ -47,7 +53,7 @@ export default class AccountService {
       return accounts[accountIndex].value;
     } else {
       console.log('Conta não existe');
-      return -1;
+      return NaN;
     }
   }
    

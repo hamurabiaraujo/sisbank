@@ -26,7 +26,7 @@ export default class GetAccount extends React.Component <any, any>{
     handleSubmit(event: any) {
         event.preventDefault();
         const bankBalance = this.service.getBankBalance(this.state.id, this.accounts);
-        if(bankBalance < 0) {
+        if(isNaN(bankBalance)) {
             alert('Conta não existe');
         } else {
             alert(`Conta N°: ${this.state.id} Saldo: R$ ${bankBalance}`);

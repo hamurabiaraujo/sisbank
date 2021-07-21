@@ -3,9 +3,9 @@ import './App.css';
 import NewAccount from './account/NewAccount';
 import AccountService from '../services/account';
 import Account from '../interfaces/account';
-//import AccountList from "./account/list/AccountList";
+import AccountList from "./account/list/AccountList";
 import GetAccount from "./account/list/GetAccount";
-import CreditAccount from './account/CreditAccount';
+import AccountOperations from './account/AccountOperations';
 
 class App extends React.Component <any, any> {
   
@@ -47,11 +47,11 @@ class App extends React.Component <any, any> {
         <h1>Sistema de Gerenciamento Bancário</h1>
         <h2>Criar conta</h2>
         <NewAccount onAccountsChange={this.handleAccountsChange}/>
-        <h2>Credito na conta</h2>
-        <CreditAccount onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts}/>
-        {/* <AccountList accounts={this.accounts}/> */}
+        <h2>Creditar/Debitar na conta</h2>
+        <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts}/>
         <h2>Consultar Saldo</h2>
         <GetAccount accounts={this.accounts}/>
+        <AccountList accounts={this.accounts}/>
       </div>
     );
   }
