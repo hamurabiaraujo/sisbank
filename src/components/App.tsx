@@ -59,9 +59,9 @@ class App extends React.Component <any, any> {
         <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts}/>
         <h2>Consultar Saldo</h2>
         <GetAccount accounts={this.accounts}/>
-        <AccountList accounts={this.accounts}/>
-
+        <h2>Transferir Saldo</h2>
         <Transfer accounts={this.accounts} onTransferDone={this.handleTransferDone}/>
+        <AccountList accounts={this.accounts}/>
       </div>
     );
   }
