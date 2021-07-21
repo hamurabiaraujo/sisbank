@@ -1,12 +1,9 @@
 import React from "react";
 import Account from "../../interfaces/account";
 import AccountService from "../../services/account";
-import AccountList from "./list/AccountList";
 
 class NewAccount extends React.Component <any, Account> {
-
   service = new AccountService();
-  accounts: Account[] = [];
 
   constructor(props: any) {
     super(props);
@@ -15,14 +12,8 @@ class NewAccount extends React.Component <any, Account> {
       id: '',
       value: 0
     };
-
-    this.updateAccounts(); 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  updateAccounts() {
-    this.accounts = this.service.getAll();
   }
 
   handleChange(event: any) {
@@ -34,11 +25,10 @@ class NewAccount extends React.Component <any, Account> {
   handleSubmit(event: any) {
     event.preventDefault();
     this.service.create(this.state);
+    this.props.onAccountsChange(this.state);
     this.setState({
       id: '',
     });
-    this.updateAccounts();
-
     alert(`Nova conta criada: ${this.state.id}`);
   }
 
@@ -51,7 +41,6 @@ class NewAccount extends React.Component <any, Account> {
           </label>
           <input type="submit" value="Criar" />
         </form>
-        <AccountList accounts={this.accounts}/>
       </React.Fragment>
     );
   }
