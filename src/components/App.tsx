@@ -5,6 +5,7 @@ import AccountService from '../services/account';
 import Account from '../interfaces/account';
 import AccountList from "./account/list/AccountList";
 import CreditAccount from './account/CreditAccount';
+import Transfer from './account/Transfer';
 
 class App extends React.Component <any, any> {
   
@@ -20,6 +21,7 @@ class App extends React.Component <any, any> {
 
     this.handleAccountsChange = this.handleAccountsChange.bind(this);
     this.handleCreditAccount = this.handleCreditAccount.bind(this);
+    this.handleTransferDone = this.handleTransferDone.bind(this);
   }
 
   updateAccounts() {
@@ -40,6 +42,12 @@ class App extends React.Component <any, any> {
     });
   }
 
+  handleTransferDone(accountsUpdated: Account[]) {
+    this.setState({
+      accounts: accountsUpdated,
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -47,6 +55,8 @@ class App extends React.Component <any, any> {
         <NewAccount onAccountsChange={this.handleAccountsChange}/>
         <CreditAccount onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts}/>
         <AccountList accounts={this.accounts}/>
+
+        <Transfer accounts={this.accounts} onTransferDone={this.handleTransferDone}/>
       </div>
     );
   }
