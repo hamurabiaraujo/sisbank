@@ -29,6 +29,7 @@ export default class AccountService {
 
   create(a: Account) {
     this.ACCOUNTS.push(a);
+    console.log(this.ACCOUNTS);
   }
   
   operationOnAccount(accountId: string, operationValue: number, typeOfOperation: string, accounts: Account[]): Account[] {
@@ -55,6 +56,24 @@ export default class AccountService {
       console.log('Conta não existe');
       return NaN;
     }
+  }
+
+  transfer(fromAccountId: string, toAccountId: string, value: number, accounts: Account[]): Account[] {
+    this.ACCOUNTS = accounts;
+
+    const fromAccountIndex = accounts.findIndex(acc => acc.id === fromAccountId);
+    const toAccountIndex = accounts.findIndex(acc => acc.id === toAccountId);
+
+    console.log(fromAccountIndex, toAccountIndex);
+
+    if(fromAccountIndex >= 0 && toAccountIndex >= 0) {
+      accounts[fromAccountIndex].value -= value;
+      accounts[toAccountIndex].value += value;
+    } else {
+      console.log('Conta não existe');
+    }
+    
+    return accounts;
   }
    
 }
