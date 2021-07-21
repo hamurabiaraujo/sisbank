@@ -34,6 +34,7 @@ export default class CreditAccount extends React.Component<any, any> {
   handleSubmit(event: any) {
     event.preventDefault();
     this.accounts = this.service.creditOnAccount(this.state.accountId, this.state.creditValue, this.accounts);
+    this.props.onCreditAccountChange(this.accounts);
     this.setState({
         accountId: '',
         creditValue: 0
