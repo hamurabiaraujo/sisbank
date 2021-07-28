@@ -1,9 +1,13 @@
 import React from 'react';
 import './App.css';
 import NewAccount from './account/NewAccount';
+import NewBonusAccount from './account/NewBonusAccount';
 import AccountService from '../services/account';
+import BonusAccountService from '../services/bonusAccount';
 import Account from '../interfaces/account';
+import BonusAccount from '../interfaces/bonusAccount';
 import AccountList from "./account/list/AccountList";
+import BonusAccountList from './account/list/BonusAccountList';
 import GetAccount from "./account/list/GetAccount";
 import AccountOperations from './account/AccountOperations';
 import Transfer from './account/Transfer';
@@ -11,22 +15,27 @@ import Transfer from './account/Transfer';
 class App extends React.Component <any, any> {
   
   service = new AccountService();
-  accounts: Account[] = [];
+  bonusService = new BonusAccountService();
+  accounts: any[] = [];
+  bonusAccounts: BonusAccount[] = [];
 
   constructor(props: any) {
     super(props);
     this.updateAccounts();
     this.state = {
       accounts: this.accounts,
+      bonusAccounts: this.bonusAccounts,
     };
 
     this.handleAccountsChange = this.handleAccountsChange.bind(this);
     this.handleCreditAccount = this.handleCreditAccount.bind(this);
     this.handleTransferDone = this.handleTransferDone.bind(this);
+    this.handleBonusAccountsChange = this.handleBonusAccountsChange.bind(this);
   }
 
   updateAccounts() {
     this.accounts = this.service.getAll();
+    this.bonusAccounts = this.bonusService.getAll();
   }
 
   handleAccountsChange(account: Account) {
@@ -36,16 +45,26 @@ class App extends React.Component <any, any> {
       accounts: this.accounts,
     });
   }
-
-  handleCreditAccount(accountsUpdated: Account[]) {
+  
+  handleBonusAccountsChange(account: BonusAccount) {
+    this.bonusService.create(account);
+    this.updateAccounts();
     this.setState({
-      accounts: accountsUpdated,
+      bonusAccounts: this.bonusAccounts,
     });
   }
 
-  handleTransferDone(accountsUpdated: Account[]) {
+  handleCreditAccount(accountsUpdated: Account[], bonusAccountUpdated: BonusAccount[]) {
     this.setState({
       accounts: accountsUpdated,
+      bonusAccounts: bonusAccountUpdated,
+    });
+  }
+
+  handleTransferDone(accountsUpdated: Account[], bonusAccountUpdated: BonusAccount[]) {
+    this.setState({
+      accounts: accountsUpdated,
+      bonusAccounts: bonusAccountUpdated,
     });
   }
 
@@ -55,13 +74,16 @@ class App extends React.Component <any, any> {
         <h1>Sistema de Gerenciamento Bancário</h1>
         <h2>Criar conta</h2>
         <NewAccount onAccountsChange={this.handleAccountsChange}/>
+        <h2>Criar conta Bonus</h2>
+        <NewBonusAccount onAccountsChange={this.handleBonusAccountsChange}/>
         <h2>Creditar/Debitar na conta</h2>
-        <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts}/>
+        <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts} bonusAccounts={this.bonusAccounts}/>
         <h2>Consultar Saldo</h2>
         <GetAccount accounts={this.accounts}/>
         <AccountList accounts={this.accounts}/>
+        <BonusAccountList accounts={this.bonusAccounts}/>
 
-        <Transfer accounts={this.accounts} onTransferDone={this.handleTransferDone}/>
+        <Transfer accounts={this.accounts} bonusAccounts={this.bonusAccounts} onTransferDone={this.handleTransferDone}/>
       </div>
     );
   }

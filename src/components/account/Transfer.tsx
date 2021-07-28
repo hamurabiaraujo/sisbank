@@ -1,10 +1,14 @@
 import React from 'react';
-import Account from '../../interfaces/account';
+import BonusAccountService from "../../services/bonusAccount";
+import Account from "../../interfaces/account";
+import BonusAccount from "../../interfaces/bonusAccount";
 import AccountService from '../../services/account';
 
 export default class Transfer extends React.Component <any, any> {
   service = new AccountService();
-  accounts: Account[] = [];
+  bonusService = new BonusAccountService();
+  accounts: any[];
+  bonusAccounts: BonusAccount[];
 
   constructor(props: any) {
     super(props);
@@ -15,14 +19,18 @@ export default class Transfer extends React.Component <any, any> {
       amount: '',
     }
 
-    this.accounts = props.accounts;  
+    this.accounts = props.accounts;
+    this.bonusAccounts = props.bonusAccounts;  
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event: any) {
     event.preventDefault();
-    this.accounts = this.service.transfer(this.state.fromAccountId, this.state.toAccountId, this.state.amount, this.accounts);
+    this.accounts = this.accounts.concat(this.bonusAccounts);
+    console.log(this.accounts);
+    this.accounts = this.bonusService.transfer(this.state.fromAccountId, this.state.toAccountId, this.state.amount, this.accounts);
     this.props.onTransferDone(this.accounts);
 
     this.setState({
