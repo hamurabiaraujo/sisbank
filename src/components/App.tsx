@@ -4,6 +4,7 @@ import NewAccount from './account/NewAccount';
 import AccountService from '../services/account';
 import Account from '../interfaces/account';
 import AccountList from "./account/list/AccountList";
+import SavingAccount from "./account/Savings";
 import GetAccount from "./account/list/GetAccount";
 import AccountOperations from './account/AccountOperations';
 import Transfer from './account/Transfer';
@@ -61,6 +62,7 @@ class App extends React.Component <any, any> {
         <GetAccount accounts={this.accounts}/>
         <h2>Transferir Saldo</h2>
         <Transfer accounts={this.accounts} onTransferDone={this.handleTransferDone}/>
+        <SavingAccount accounts={this.accounts}/>
         <AccountList accounts={this.accounts}/>
       </div>
     );
