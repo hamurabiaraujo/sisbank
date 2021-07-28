@@ -79,7 +79,7 @@ class App extends React.Component <any, any> {
         <h2>Creditar/Debitar na conta</h2>
         <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts} bonusAccounts={this.bonusAccounts}/>
         <h2>Consultar Saldo</h2>
-        <GetAccount accounts={this.accounts}/>
+        <GetAccount accounts={this.accounts} bonusAccounts={this.bonusAccounts} />
         <AccountList accounts={this.accounts}/>
         <BonusAccountList accounts={this.bonusAccounts}/>
 

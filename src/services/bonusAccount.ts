@@ -44,6 +44,16 @@ export default class BonusAccountService {
     }
   }
 
+  getBonusPoints(accountId: string, accounts: BonusAccount[]): number {
+    const accountIndex = accounts.findIndex(acc => acc.id === accountId);
+    if(accountIndex >= 0) {
+      return accounts[accountIndex].bonus;
+    } else {
+      console.log('Conta não existe');
+      return NaN;
+    }
+  }
+
   transfer(fromAccountId: string, toAccountId: string, value: number, accounts: any[]): any[] {
     this.ACCOUNTS = accounts;
 

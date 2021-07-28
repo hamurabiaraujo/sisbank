@@ -1,6 +1,5 @@
 import React from 'react';
 import BonusAccountService from "../../services/bonusAccount";
-import Account from "../../interfaces/account";
 import BonusAccount from "../../interfaces/bonusAccount";
 import AccountService from '../../services/account';
 

@@ -1,10 +1,14 @@
 import React from "react";
 import Account from "../../../interfaces/account";
+import BonusAccount from "../../../interfaces/bonusAccount";
 import AccountService from "../../../services/account";
+import BonusAccountService from "../../../services/bonusAccount";
 
 export default class GetAccount extends React.Component <any, any>{
     accounts: Account[];
+    bonusAccounts: BonusAccount[];
     service = new AccountService();
+    bonusService = new BonusAccountService();
 
     constructor(props: any) {
         super(props);
@@ -13,6 +17,7 @@ export default class GetAccount extends React.Component <any, any>{
         };
 
         this.accounts = props.accounts;
+        this.bonusAccounts = props.bonusAccounts;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -25,11 +30,15 @@ export default class GetAccount extends React.Component <any, any>{
   
     handleSubmit(event: any) {
         event.preventDefault();
-        const bankBalance = this.service.getBankBalance(this.state.id, this.accounts);
+        const allAccounts: any[] = this.accounts.concat(this.bonusAccounts);
+        const bankBalance = this.bonusService.getBankBalance(this.state.id, allAccounts);
+        const bonusPoints = this.bonusService.getBonusPoints(this.state.id, allAccounts);
         if(isNaN(bankBalance)) {
             alert('Conta não existe');
-        } else {
+        } else if(isNaN(bonusPoints)) {
             alert(`Conta N°: ${this.state.id} Saldo: R$ ${bankBalance}`);
+        } else {
+            alert(`Conta N°: ${this.state.id} Saldo: R$ ${bankBalance} Pontos: ${bonusPoints}`);
         }
         this.setState({
             id: '',
