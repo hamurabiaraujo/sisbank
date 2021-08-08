@@ -82,8 +82,9 @@ class App extends React.Component <any, any> {
         <GetAccount accounts={this.accounts} bonusAccounts={this.bonusAccounts} />
         <AccountList accounts={this.accounts}/>
         <BonusAccountList accounts={this.bonusAccounts}/>
-
+        <h2>Transferir Saldo</h2>
         <Transfer accounts={this.accounts} bonusAccounts={this.bonusAccounts} onTransferDone={this.handleTransferDone}/>
+        <GetAccount accounts={this.accounts}/>
       </div>
     );
   }
