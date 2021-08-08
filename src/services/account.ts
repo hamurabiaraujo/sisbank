@@ -27,6 +27,10 @@ export default class AccountService {
     return this.ACCOUNTS;
   }
 
+  getById(id: string, accounts: Account[]) {
+    return accounts.find(acc => acc.id === id);
+  }
+
   create(a: Account) {
     this.ACCOUNTS.push(a);
     console.log(this.ACCOUNTS);

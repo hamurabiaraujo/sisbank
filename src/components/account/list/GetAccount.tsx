@@ -52,7 +52,7 @@ export default class GetAccount extends React.Component <any, any>{
                     <label>Número da conta:
                         <input type="text" value={this.state.id} onChange={this.handleChange} />
                     </label>
-                    <input type="submit" value="Consulta Saldo"/>
+                    <input type="submit" value={ this.bonusAccounts ? "Consulta Saldo Bonus" : "Consulta Saldo" }/>
                 </form>
             </React.Fragment>
         );

@@ -8,6 +8,7 @@ import Account from '../interfaces/account';
 import BonusAccount from '../interfaces/bonusAccount';
 import AccountList from "./account/list/AccountList";
 import BonusAccountList from './account/list/BonusAccountList';
+import SavingAccount from "./account/Savings";
 import GetAccount from "./account/list/GetAccount";
 import AccountOperations from './account/AccountOperations';
 import Transfer from './account/Transfer';
@@ -80,11 +81,15 @@ class App extends React.Component <any, any> {
         <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts} bonusAccounts={this.bonusAccounts}/>
         <h2>Consultar Saldo</h2>
         <GetAccount accounts={this.accounts} bonusAccounts={this.bonusAccounts} />
-        <AccountList accounts={this.accounts}/>
-        <BonusAccountList accounts={this.bonusAccounts}/>
+        <GetAccount accounts={this.accounts}/>
+        <h2>Calcular juros poupança</h2>
+        <SavingAccount accounts={this.accounts}/>
         <h2>Transferir Saldo</h2>
         <Transfer accounts={this.accounts} bonusAccounts={this.bonusAccounts} onTransferDone={this.handleTransferDone}/>
-        <GetAccount accounts={this.accounts}/>
+        <h2>Contas</h2>
+        <AccountList accounts={this.accounts}/>
+        <h2>Contas Bonus</h2>
+        <BonusAccountList accounts={this.bonusAccounts}/>
       </div>
     );
   }
