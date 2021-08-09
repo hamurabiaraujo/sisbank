@@ -22,7 +22,8 @@ class SavingsAccount extends React.Component <any, any> {
     console.log(account);
 
     if ( account ) {
-      alert(`Total: R$ ${account.value * (this.state.interestRate / 100) + account.value}`);
+      const v = parseInt(account.value as any, 10);
+      alert(`Total: R$ ${v * (this.state.interestRate / 100) + v}`);
     } else {
       alert('Conta não encontrada!');
     }
