@@ -65,7 +65,7 @@ export default class BonusAccountService {
     if(fromAccountIndex >= 0 && toAccountIndex >= 0) {
       accounts[fromAccountIndex].value -= value;
       accounts[toAccountIndex].value += value;
-      const bonusPoints = Math.floor(value/200);
+      const bonusPoints = Math.floor(value/150);
       accounts[toAccountIndex].bonus += bonusPoints;
     } else {
       console.log('Conta não existe');
