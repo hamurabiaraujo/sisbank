@@ -21,7 +21,10 @@ class SavingsAccount extends React.Component <any, any> {
 
     console.log(account);
 
-    if ( account ) {
+    // TODO: revisar essa regra
+    if (this.state.interestRate < 0) {
+      alert('Valor de juros não pode ser negativo');
+    } else if ( account ) {
       alert(`Total: R$ ${account.value * (this.state.interestRate / 100) + account.value}`);
     } else {
       alert('Conta não encontrada!');
