@@ -41,8 +41,15 @@ export default class AccountService {
     if(accountIndex >= 0) {
       if(typeOfOperation === 'Credit'){
         accounts[accountIndex].value += operationValue;
+        alert(`R$${operationValue} creditado na conta ${accountId}`);
       } else if (typeOfOperation === 'Debit') {
-        accounts[accountIndex].value -= operationValue;
+        if((accounts[accountIndex].value - operationValue) < -1000){
+          alert('Debito não pode ser realizado. Limite máximo de saldo negativo de R$ -1.000,00.');
+          console.log('Debito não pode ser realizado. Limite máximo de saldo negativo de R$ -1.000,00.');
+        } else {
+          accounts[accountIndex].value -= operationValue;
+          alert(`R$${operationValue} debitado na conta ${accountId}`);
+        }
       } else {
         console.log('Operação inválida');
       }
@@ -71,8 +78,14 @@ export default class AccountService {
     console.log(fromAccountIndex, toAccountIndex);
 
     if(fromAccountIndex >= 0 && toAccountIndex >= 0) {
-      accounts[fromAccountIndex].value -= value;
-      accounts[toAccountIndex].value += value;
+      if((accounts[fromAccountIndex].value - value) < -1000){
+        alert('Transferencia não pode ser realizada. Limite máximo de saldo negativo de R$ -1.000,00.');
+        console.log('Transferencia não pode ser realizada. Limite máximo de saldo negativo de R$ -1.000,00.');
+      } else {
+        accounts[fromAccountIndex].value -= value;
+        accounts[toAccountIndex].value += value;
+        alert(`Transferência efetuada com sucesso`);
+      }
     } else {
       console.log('Conta não existe');
     }

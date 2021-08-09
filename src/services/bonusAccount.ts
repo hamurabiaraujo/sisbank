@@ -23,8 +23,15 @@ export default class BonusAccountService {
         accounts[accountIndex].value += operationValue;
         const bonusPoints = Math.floor(operationValue/100);
         accounts[accountIndex].bonus += bonusPoints;
+        alert(`R$${operationValue} creditado na conta ${accountId}`);
       } else if (typeOfOperation === 'Debit') {
-        accounts[accountIndex].value -= operationValue;
+        if((accounts[accountIndex].value - operationValue) < -1000){
+          alert('Debito não pode ser realizado. Limite máximo de saldo negativo de R$ -1.000,00.');
+          console.log('Debito não pode ser realizado. Limite máximo de saldo negativo de R$ -1.000,00.');
+        } else {
+          accounts[accountIndex].value -= operationValue;
+          alert(`R$${operationValue} debitado na conta ${accountId}`);
+        }
       } else {
         console.log('Operação inválida');
       }
@@ -63,10 +70,16 @@ export default class BonusAccountService {
     console.log(fromAccountIndex, toAccountIndex);
 
     if(fromAccountIndex >= 0 && toAccountIndex >= 0) {
-      accounts[fromAccountIndex].value -= value;
-      accounts[toAccountIndex].value += value;
-      const bonusPoints = Math.floor(value/150);
-      accounts[toAccountIndex].bonus += bonusPoints;
+      if((accounts[fromAccountIndex].value - value) < -1000){
+        alert('Transferencia não pode ser realizada. Limite máximo de saldo negativo de R$ -1.000,00.');
+        console.log('Transferencia não pode ser realizada. Limite máximo de saldo negativo de R$ -1.000,00.');
+      } else {
+        accounts[fromAccountIndex].value -= value;
+        accounts[toAccountIndex].value += value;
+        const bonusPoints = Math.floor(value/150);
+        accounts[toAccountIndex].bonus += bonusPoints;
+        alert(`Transferência efetuada com sucesso`);
+      }
     } else {
       console.log('Conta não existe');
     }

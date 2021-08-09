@@ -55,11 +55,6 @@ export default class AccountOperations extends React.Component<any, any> {
         accountId: '',
         operationValue: 0
     });
-    if(this.state.selectedOption === 'Credit'){
-      alert(`R$${this.state.operationValue} creditado na conta ${this.state.accountId}`);
-    } else if(this.state.selectedOption === 'Debit'){
-      alert(`R$${this.state.operationValue} debitado na conta ${this.state.accountId}`);
-    } 
   }
 
     render() {

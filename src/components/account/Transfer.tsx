@@ -37,8 +37,6 @@ export default class Transfer extends React.Component <any, any> {
       toAccountId: '',
       amount: 0,
     });
-
-    alert(`Transferência efetuada com sucesso`);
   }
 
   handleChange(event: any) {
