@@ -16,6 +16,12 @@ import SavingsAccount from "./account/Savings";
 import GetAccount from "./account/list/GetAccount";
 import AccountOperations from './account/AccountOperations';
 import Transfer from './account/Transfer';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 class App extends React.Component <any, any> {
   
@@ -89,30 +95,59 @@ class App extends React.Component <any, any> {
 
   render() {
     return (
-      <div className="App">
-        <h1>Sistema de Gerenciamento Bancário</h1>
-        <h2>Criar conta</h2>
-        <NewAccount onAccountsChange={this.handleAccountsChange}/>
-        <h2>Criar conta Bonus</h2>
-        <NewBonusAccount onAccountsChange={this.handleBonusAccountsChange}/>
-        <h2>Criar conta Poupança</h2>
-        <NewSavingsAccount onAccountsChange={this.handleSavingsAccountsChange}/>
-        <h2>Creditar/Debitar na conta</h2>
-        <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts} bonusAccounts={this.bonusAccounts}/>
-        <h2>Consultar Saldo</h2>
-        <GetAccount accounts={this.accounts} bonusAccounts={this.bonusAccounts} />
-        <GetAccount accounts={this.accounts}/>
-        <h2>Calcular juros poupança</h2>
-        <SavingsAccount accounts={this.savingsAccounts}/>
-        <h2>Transferir Saldo</h2>
-        <Transfer accounts={this.accounts} bonusAccounts={this.bonusAccounts} onTransferDone={this.handleTransferDone}/>
-        <h2>Contas</h2>
-        <AccountList accounts={this.accounts}/>
-        <h2>Contas Bonus</h2>
-        <BonusAccountList accounts={this.bonusAccounts}/>
-        <h2>Contas Poupança</h2>
-        <SavingsAccountList accounts={this.savingsAccounts}/>
-      </div>
+      <Router>
+        <div className="App">
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/nova-conta">Criar Conta</Link></li>
+            <li><Link to="/nova-conta-bonus">Criar Conta Bônus</Link></li>
+            <li><Link to="/nova-conta-poupanca">Criar Conta Poupança</Link></li>
+            <li><Link to="/creditar-e-debitar">Creditar / Debitar</Link></li>
+            <li><Link to="/consultar-saldo">Consultar Saldo</Link></li>
+            <li><Link to="/calcular-juros">Calcular Juros Poupança</Link></li>
+            <li><Link to="/transferir">Transferir</Link></li>
+            <li><Link to="/listar-contas">Ver Contas </Link></li>
+            <li><Link to="/listar-contas-bonus">Ver Contas Bônus</Link></li>
+            <li><Link to="/listar-contas-poupanca">Ver Contas Poupança</Link></li>
+          </ul>
+          <Switch>
+            <Route exact path="/">
+              <h1>Sistema de Gerenciamento Bancário</h1>
+            </Route>
+            <Route exact path="/nova-conta">
+              <NewAccount onAccountsChange={this.handleAccountsChange}/>
+            </Route>
+            <Route exact path="/nova-conta-bonus">
+              <NewBonusAccount onAccountsChange={this.handleBonusAccountsChange}/>
+            </Route>
+            <Route exact path="/nova-conta-poupanca">
+              <NewSavingsAccount onAccountsChange={this.handleSavingsAccountsChange}/>
+            </Route>
+            <Route exact path="/creditar-e-debitar">
+              <AccountOperations onCreditAccountChange={this.handleCreditAccount} accounts={this.accounts} bonusAccounts={this.bonusAccounts}/>
+            </Route>
+            <Route exact path="/consultar-saldo">
+              <GetAccount accounts={this.accounts} bonusAccounts={this.bonusAccounts} />
+              <GetAccount accounts={this.accounts}/>
+            </Route>
+            <Route exact path="/calcular-juros">
+              <SavingsAccount accounts={this.savingsAccounts}/>
+            </Route>
+            <Route exact path="/transferir">
+              <Transfer accounts={this.accounts} bonusAccounts={this.bonusAccounts} onTransferDone={this.handleTransferDone}/>
+            </Route>
+            <Route exact path="/listar-contas">
+              <AccountList accounts={this.accounts}/>
+            </Route>
+            <Route exact path="/listar-contas-bonus">
+              <BonusAccountList accounts={this.bonusAccounts}/>
+            </Route>
+            <Route exact path="/listar-contas-poupanca">
+              <SavingsAccountList accounts={this.savingsAccounts}/>
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
