@@ -9,6 +9,10 @@ export default class BonusAccountService {
   getAll(): BonusAccount[] {
     return this.ACCOUNTS;
   }
+  
+  getById(id: string, accounts: BonusAccount[]) {
+    return accounts.find(acc => acc.id === id);
+  }
 
   create(a: BonusAccount) {
     a.bonus = 10;
