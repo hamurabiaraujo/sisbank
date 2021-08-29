@@ -31,8 +31,8 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Running project
-        run: npm start 
+        run: npm run build 
         
       # Runs a set of commands using the runners shell
       - name: Running tests
-        run: npm test
+        run: npm run test
