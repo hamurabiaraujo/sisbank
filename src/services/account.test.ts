@@ -1,17 +1,17 @@
 import AccountService from "./account";
 import Account from "../interfaces/account";
 
-test('getAll should return 4 accounts on start', () => {
+test('getAll should return at least 5 accounts on start', () => {
     const accountClass = new AccountService();
-    expect(accountClass.getAll().length).toEqual(4);
+    expect(accountClass.getAll().length).toBeGreaterThanOrEqual(5);
 });
 
-test('getAll should return 5 accounts after creation of a new account', () => {
+test('getAll should return at least 6 accounts after creation of a new account', () => {
     const accountClass = new AccountService();
     const newAccount: Account = {id: getRandomIntInclusive(445, 9999).toString(), value: 0};
     accountClass.create(newAccount);
     window.alert = () => {}; 
-    expect(accountClass.getAll().length).toEqual(5);
+    expect(accountClass.getAll().length).toBeGreaterThanOrEqual(6);
 });
 
 test('credit on account', () => {
