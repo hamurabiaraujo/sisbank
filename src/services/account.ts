@@ -23,7 +23,7 @@ export default class AccountService {
     },
     {
       id: '555',
-      value: 150.00
+      value: 160.00
     },
   ] as Account[];
 
