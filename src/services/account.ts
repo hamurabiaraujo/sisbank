@@ -21,6 +21,10 @@ export default class AccountService {
       id: '444',
       value: 100.00
     },
+    {
+      id: '555',
+      value: 150.00
+    },
   ] as Account[];
 
   getAll(): Account[] {
